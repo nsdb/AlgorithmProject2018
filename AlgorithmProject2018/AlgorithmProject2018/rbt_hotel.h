@@ -3,15 +3,7 @@
 #include <stdio.h>
 #include "data_type.h"
 
-enum nodeColor { red, black };
-
-typedef struct Node {
-	HOTEL hotel;
-	enum nodeColor color;
-	Node* left, *right, *parent;
-}Node;
-
-void make_hotelTree(int n_site);
+Node* make_hotelTree(int n_site);
 Node* Search_tree(Node* node, int key, int n_site);
 void left_rotation(Node* root, Node* x);
 void right_rotation(Node* root, Node* x);

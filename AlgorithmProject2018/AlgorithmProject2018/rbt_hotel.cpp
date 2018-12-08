@@ -3,12 +3,13 @@
 extern SITE site[SITE_COUNT];
 extern TRANSFORMATION transportation[TRANSPORTATION_COUNT];
 
-Node* root = NULL;
+Node* make_hotelTree(int n_site) {
 
-void make_hotelTree(int n_site) {
-	for (int i = 0; i<100; i++) {
-		Insert_RB(root, site[n_site].hotel[i], n_site);
+	Node* root = NULL;
+	for (int i = 0; i < HOTEL_COUNT; i++) {
+		root = Insert_RB(root, site[n_site].hotel[i], n_site);
 	}
+	return root;
 }
 
 
@@ -296,7 +297,7 @@ void PrintBst(Node* node, int space) {
 	for (int i = 1; i< space; i++)
 		printf("\t");
 
-	printf("id: %d\n", node->hotel.id);
+	printf("[id: %d, price: %d]\n", node->hotel.id, node->hotel.price);
 
 	PrintBst(node->left, space);
 }

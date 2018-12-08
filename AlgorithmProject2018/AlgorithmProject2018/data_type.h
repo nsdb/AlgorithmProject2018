@@ -23,6 +23,8 @@ const int TRANSPORTATION_TIME_MAX = 20;
 const int TRANSPORTATION_PRICE_MIN = 5000;
 const int TRANSPORTATION_PRICE_MAX = 200000;
 
+struct Node;
+
 typedef struct HOTEL {
 	int id;
 	int price;
@@ -33,6 +35,7 @@ typedef struct SITE {
 	int time;
 	int price;
 	HOTEL hotel[HOTEL_COUNT];
+	Node* hotel_node;
 }SITE;
 
 typedef struct TRANSPORTATION {
@@ -41,6 +44,15 @@ typedef struct TRANSPORTATION {
 	int price;
 	SITE *departure, *arrival;
 } TRANSFORMATION;
+
+enum nodeColor { red, black };
+
+typedef struct Node {
+	HOTEL hotel;
+	enum nodeColor color;
+	Node* left, *right, *parent;
+}Node;
+
 
 void init_data();
 void print_hotel(int site_id);

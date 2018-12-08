@@ -1,5 +1,6 @@
 #include <iostream>
 #include "data_type.h"
+#include "rbt_hotel.h"
 
 SITE site[SITE_COUNT];
 TRANSFORMATION transportation[TRANSPORTATION_COUNT];
@@ -24,9 +25,12 @@ void init_data() {
 		int hotel_price[HOTEL_COUNT];
 		set_random_array(hotel_price, HOTEL_COUNT, HOTEL_PRICE_MIN, SITE_PRICE_MAX, FALSE);
 		for (int j = 0; j < HOTEL_COUNT; j++) {
-			site[i].hotel[j].id = i * HOTEL_COUNT + j;
+			site[i].hotel[j].id = j;
 			site[i].hotel[j].price = hotel_price[j];
 		}
+
+		site[i].hotel_node = make_hotelTree(i);
+
 
 	}
 
@@ -57,13 +61,9 @@ void init_data() {
 }
 
 void print_hotel(int site_id) {
-	for (int j = 0; j < HOTEL_COUNT; j++) {
-		std::cout << "hotel " << j << 
-			" of site " << site_id << 
-			" : id=" << site[site_id].hotel[j].id << 
-			", price=" << site[site_id].hotel[j].price << 
-			std::endl;
-	}
+	std::cout << "- 해당 부지의 호텔 정보가 담긴 RBT를 출력합니다." << std::endl;
+	PrintBst(site[site_id].hotel_node, 0);
+
 }
 void print_site() {
 	for (int i = 0; i < SITE_COUNT; i++) {
