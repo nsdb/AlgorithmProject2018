@@ -301,21 +301,3 @@ void PrintBst(Node* node, int space) {
 	PrintBst(node->left, space);
 }
 
-void setA(int a[]) {
-	for (int i = 0; i<20; i++) {
-		int dup = 0, n;
-		do {
-			n = rand() % 50;
-			for (int j = 0; j<i; j++) {
-				if (n == a[j]) {
-					dup = 1;
-					break;
-				}
-				else dup = 0;
-			}
-		} while (dup == 1);
-		a[i] = n;
-		printf("%d ", a[i]);
-	}
-	printf("\n");
-}

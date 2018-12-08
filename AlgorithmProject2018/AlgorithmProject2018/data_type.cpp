@@ -87,24 +87,6 @@ void print_transportation() {
 }
 
 
-void print_all_data() {
-
-	// site, hotel
-	for (int i = 0; i < SITE_COUNT; i++) {
-
-		std::cout << "site " << i << " : id=" << site[i].id << ", time=" << site[i].time << ", price=" << site[i].price << std::endl;
-
-		for (int j = 0; j < HOTEL_COUNT; j++) {
-			std::cout << "hotel " << j << " : id=" << site[i].hotel[j].id << ", price=" << site[i].hotel[j].price << std::endl;
-		}
-
-	}
-
-
-
-}
-
-
 void set_random_array(int array[], int count, int min, int max, int duplicate_allow) {
 
 	int dup_check = 0, n;
