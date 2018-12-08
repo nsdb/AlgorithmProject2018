@@ -30,7 +30,7 @@ void init_data() {
 
 	}
 
-	std::cout << "- 호텔, 사이트 데이터 초기화 완료" << std::endl;
+	std::cout << "- 호텔, 부지 데이터 초기화 완료" << std::endl;
 
 	// transformation init
 	int transfortation_time[TRANSPORTATION_COUNT];
@@ -52,9 +52,58 @@ void init_data() {
 
 	}
 
-	std::cout << "- 교통 데이터 초기화 완료" << std::endl;
+	std::cout << "- 교통수단 데이터 초기화 완료" << std::endl;
 
 }
+
+void print_hotel(int site_id) {
+	for (int j = 0; j < HOTEL_COUNT; j++) {
+		std::cout << "hotel " << j << 
+			" of site " << site_id << 
+			" : id=" << site[site_id].hotel[j].id << 
+			", price=" << site[site_id].hotel[j].price << 
+			std::endl;
+	}
+}
+void print_site() {
+	for (int i = 0; i < SITE_COUNT; i++) {
+		std::cout << "site " << i << 
+			" : id=" << site[i].id << 
+			", time=" << site[i].time << 
+			", price=" << site[i].price << 
+			std::endl;
+	}
+}
+void print_transportation() {
+	for (int i = 0; i < TRANSPORTATION_COUNT; i++) {
+		std::cout << "transportation " << i << 
+			" : id=" << transportation[i].id << 
+			", time=" << transportation[i].time << 
+			", price=" << transportation[i].price << 
+			", departure_site_id=" << transportation[i].departure->id <<
+			", arrival_site_id=" << transportation[i].arrival->id <<
+			std::endl;
+	}
+}
+
+
+void print_all_data() {
+
+	// site, hotel
+	for (int i = 0; i < SITE_COUNT; i++) {
+
+		std::cout << "site " << i << " : id=" << site[i].id << ", time=" << site[i].time << ", price=" << site[i].price << std::endl;
+
+		for (int j = 0; j < HOTEL_COUNT; j++) {
+			std::cout << "hotel " << j << " : id=" << site[i].hotel[j].id << ", price=" << site[i].hotel[j].price << std::endl;
+		}
+
+	}
+
+
+
+}
+
 
 void set_random_array(int array[], int count, int min, int max, int duplicate_allow) {
 

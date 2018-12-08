@@ -1,10 +1,14 @@
 #include <iostream>
 #include "data_type.h"
 #include "rbt_hotel.h"
+#include "util.h"
+
+
+void menu_inquiry();
 
 int main(void) {
 
-	// 사이트, 호텔, 교통 데이터 초기화
+	// 부지, 호텔, 교통수단 데이터 초기화
 	init_data();
 
 
@@ -32,23 +36,17 @@ int main(void) {
 	int menu = -1;
 	while (menu != 4) {
 
-		std::cout << "- 메뉴 : 1-예약하기, 2-취소하기, 3-예약현황조회, 4-끝내기" << std::endl;
+		std::cout << "- 메뉴 : 1-예약하기, 2-취소하기, 3-예약현황조회, 4-끝내기, 5-데이터조회" << std::endl;
 		std::cout << "- 원하는 메뉴를 눌러주세요 : ";
-		std::cin >> menu;
-		
-		// 숫자가 아닐경우, 입력받은 값들을 모두 지우고 다시 입력받는다.
-		if (std::cin.fail()) {
-			std::cin.clear();
-			std::cin.ignore(INT_MAX, '\n');
-			menu = -1;
-			std::cout << "- 다시 입력해주세요." << std::endl;
 
-		} else switch (menu) {
+		menu = input_number();
+		switch (menu) {
 
 		case 1: std::cout << "- 예약하기" << std::endl; break; // TODO
 		case 2: std::cout << "- 취소하기" << std::endl; break; // TODO
 		case 3: std::cout << "- 예약현황조회" << std::endl; break; // TODO
 		case 4: std::cout << "- 끝내기" << std::endl; break;
+		case 5: std::cout << "- 데이터조회" << std::endl; menu_inquiry(); break;
 		default: std::cout << "- 다시 입력해주세요." << std::endl;
 
 		}
@@ -63,6 +61,30 @@ int main(void) {
 
 
 	return 0;
+
+
+}
+
+void menu_inquiry() {
+
+	int menu = -1;
+
+	std::cout << "- 데이터 조회 : 1-호텔, 2-부지, 3-교통수단" << std::endl;
+	std::cout << "- 원하는 메뉴를 눌러주세요 : ";
+
+	menu = input_number();
+	switch (menu) {
+
+	case 1: 
+		std::cout << "- 부지 ID를 입력해주세요 : ";
+		menu = input_number();
+		print_hotel(menu);
+		break;
+	case 2: print_site(); break;
+	case 3: print_transportation(); break;
+	default: std::cout << "- 다시 입력해주세요." << std::endl;
+
+	}
 
 
 }
