@@ -36,13 +36,19 @@ void init_data() {
 	int transfortation_time[TRANSPORTATION_COUNT];
 	set_random_array(transfortation_time, TRANSPORTATION_COUNT, TRANSPORTATION_TIME_MIN, TRANSPORTATION_TIME_MAX, TRUE);
 	int transfortation_price[TRANSPORTATION_COUNT];
-	set_random_array(transfortation_price, TRANSPORTATION_COUNT, TRANSPORTATION_PRICE_MIN, TRANSPORTATION_PRICE_MAX, TRUE);
+	set_random_array(transfortation_price, TRANSPORTATION_COUNT, TRANSPORTATION_PRICE_MIN, TRANSPORTATION_PRICE_MAX, FALSE);
+	int transfortation_departure[TRANSPORTATION_COUNT];
+	int transfortation_arrival[TRANSPORTATION_COUNT];
+	set_random_array(transfortation_departure, TRANSPORTATION_COUNT, 0, SITE_COUNT - 1, TRUE);
+	set_random_array(transfortation_arrival, TRANSPORTATION_COUNT, 0, SITE_COUNT - 1, TRUE);
 
 	for (int i = 0; i < TRANSPORTATION_COUNT; i++) {
 
 		transportation[i].id = i;
 		transportation[i].time = transfortation_time[i];
 		transportation[i].price = transfortation_price[i];
+		transportation[i].departure = &site[transfortation_departure[i]];
+		transportation[i].arrival = &site[transfortation_arrival[i]];
 
 	}
 

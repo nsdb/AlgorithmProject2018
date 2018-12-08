@@ -39,7 +39,7 @@ typedef struct TRANSPORTATION {
 	int id;
 	int time;
 	int price;
-	SITE* departure, arrival;
+	SITE *departure, *arrival;
 } TRANSFORMATION;
 
 void init_data();
