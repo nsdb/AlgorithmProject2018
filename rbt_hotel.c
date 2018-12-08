@@ -65,7 +65,7 @@ int main()
     printf("---------------------------------------------\n");
 //
 
-    int n_site;
+    int n_site = 0;
     for(int i=0; i<100; i++){
         root = Insert_RB(root, site[n_site].hotel[i], 0);
     }

@@ -1,6 +1,25 @@
 #include <iostream>
+#include "data_type.h"
+#include "rbt_hotel.h"
 
 int main(void) {
+
+	// 사이트, 호텔, 교통 데이터 초기화
+	init_data();
+
+
+
+	// rbt_hotel testcode
+	//int n_site = 0;
+	//for (int i = 0; i<HOTEL_COUNT; i++) {
+	//	root = Insert_RB(root, site[n_site].hotel[i], 0);
+	//}
+	//printf("Hotel\n\n");
+	//PrintBst(root, 0);
+	//printf("\n");
+
+
+
 
 	// 최초 실행시
 	std::cout << "----------------------------------------------" << std::endl;
