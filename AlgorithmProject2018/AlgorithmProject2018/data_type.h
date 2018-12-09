@@ -53,6 +53,11 @@ typedef struct Node {
 	Node* left, *right, *parent;
 }Node;
 
+typedef struct ReservationInfo {
+
+
+}ReservationInfo;
+
 
 void init_data();
 void print_hotel(int site_id);
