@@ -1,6 +1,6 @@
 #include "rbt_hotel.h"
 
-extern SITE site[SITE_COUNT];
+extern Site site[SITE_COUNT];
 extern TRANSFORMATION transportation[TRANSPORTATION_COUNT];
 
 Node* make_hotelTree(int n_site) {
@@ -215,7 +215,7 @@ void Fixup_Delete_RB(Node* root, Node* x) {
 	}
 }
 
-Node* Insert_RB(Node* root, HOTEL key, int n_site) {//price 기준으로 생성
+Node* Insert_RB(Node* root, Hotel key, int n_site) {//price 기준으로 생성
 	Node* x = (Node*)malloc(sizeof(Node));
 	Node* y = (Node*)malloc(sizeof(Node));
 	Node* z = (Node*)malloc(sizeof(Node));
@@ -249,7 +249,7 @@ Node* Insert_RB(Node* root, HOTEL key, int n_site) {//price 기준으로 생성
 	return Fixup_Insert_RB(root, z);
 }
 
-void Delete_RB(Node* root, HOTEL key, int n_site) {
+void Delete_RB(Node* root, Hotel key, int n_site) {
 	Node* x = (Node*)malloc(sizeof(Node));
 	Node* y = (Node*)malloc(sizeof(Node));
 	Node* z = (Node*)malloc(sizeof(Node));

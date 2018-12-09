@@ -4,23 +4,23 @@
 
 using namespace std;
 
-typedef struct HOTEL{
+typedef struct Hotel{
     int id;
     int price;
-}HOTEL;
+}Hotel;
 
-struct SITE{
+struct Site{
     int id;
     int time;
     int price;
-    HOTEL hotel[100];
+    Hotel hotel[100];
 }site[100];
 
-struct TRANSPORTATION{
+struct Transportation{
     int id;
     int time;
     int price;
-    struct SITE departure, arrival;
+    struct Site departure, arrival;
 }transportation[300];
 
 int main()

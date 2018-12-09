@@ -25,30 +25,30 @@ const int TRANSPORTATION_PRICE_MAX = 200000;
 
 struct Node;
 
-typedef struct HOTEL {
+typedef struct Hotel {
 	int id;
 	int price;
-}HOTEL;
+}Hotel;
 
-typedef struct SITE {
+typedef struct Site {
 	int id;
 	int time;
 	int price;
-	HOTEL hotel[HOTEL_COUNT];
+	Hotel hotel[HOTEL_COUNT];
 	Node* hotel_node;
-}SITE;
+}Site;
 
-typedef struct TRANSPORTATION {
+typedef struct Transportation {
 	int id;
 	int time;
 	int price;
-	SITE *departure, *arrival;
+	Site *departure, *arrival;
 } TRANSFORMATION;
 
 enum nodeColor { red, black };
 
 typedef struct Node {
-	HOTEL hotel;
+	Hotel hotel;
 	enum nodeColor color;
 	Node* left, *right, *parent;
 }Node;

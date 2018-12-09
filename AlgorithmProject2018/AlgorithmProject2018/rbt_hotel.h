@@ -11,8 +11,8 @@ Node* MinNum(Node* node);
 Node* successor(Node* node);
 Node* Fixup_Insert_RB(Node* root, Node* z);
 void Fixup_Delete_RB(Node* root, Node* x);
-Node* Insert_RB(Node* root, HOTEL key, int n_site);
-void Delete_RB(Node* root, HOTEL key, int n_site);
+Node* Insert_RB(Node* root, Hotel key, int n_site);
+void Delete_RB(Node* root, Hotel key, int n_site);
 void PrintBst(Node* node, int space);
 
 

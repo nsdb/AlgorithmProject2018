@@ -2,29 +2,29 @@
 #include <stdlib.h>
 #include <time.h>
 
-typedef struct HOTEL{
+typedef struct Hotel{
     int id;
     int price;
-}HOTEL;
+}Hotel;
 
-struct SITE{
+struct Site{
     int id;
     int time;
     int price;
-    HOTEL hotel[100];
+    Hotel hotel[100];
 }site[100];
 
-struct TRANSPORTATION{
+struct Transportation{
     int id;
     int time;
     int price;
-    struct SITE departure, arrival;
+    struct Site departure, arrival;
 }transportation[300];
 
 enum nodeColor{red, black};
 
 typedef struct Node{
-    HOTEL hotel;
+    Hotel hotel;
     enum nodeColor color;
     struct Node* left, *right, *parent;
 }Node;
@@ -37,8 +37,8 @@ Node* MinNum(struct Node* node);
 Node* successor(struct Node* node);
 Node* Fixup_Insert_RB(Node* root, Node* z);
 void Fixup_Delete_RB(Node* root, Node* x);
-Node* Insert_RB(Node* root, HOTEL key, int n_site);
-void Delete_RB(Node* root, HOTEL key, int n_site);
+Node* Insert_RB(Node* root, Hotel key, int n_site);
+void Delete_RB(Node* root, Hotel key, int n_site);
 void PrintBst(struct Node* node, int space);
 
 
@@ -285,7 +285,7 @@ void Fixup_Delete_RB(Node* root, Node* x){
     }
 }
 
-Node* Insert_RB(Node* root, HOTEL key, int n_site){//price 기준으로 생성
+Node* Insert_RB(Node* root, Hotel key, int n_site){//price 기준으로 생성
     struct Node* x = (Node*)malloc(sizeof(Node));
     struct Node* y = (Node*)malloc(sizeof(Node));
     struct Node* z = (Node*)malloc(sizeof(Node));
@@ -319,7 +319,7 @@ Node* Insert_RB(Node* root, HOTEL key, int n_site){//price 기준으로 생성
     return Fixup_Insert_RB(root, z);
 }
 
-void Delete_RB(Node* root, HOTEL key, int n_site){
+void Delete_RB(Node* root, Hotel key, int n_site){
     struct Node* x = (Node*)malloc(sizeof(Node));
     struct Node* y = (Node*)malloc(sizeof(Node));
     struct Node* z = (Node*)malloc(sizeof(Node));

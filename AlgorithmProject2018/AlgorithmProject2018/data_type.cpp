@@ -2,7 +2,7 @@
 #include "data_type.h"
 #include "rbt_hotel.h"
 
-SITE site[SITE_COUNT];
+Site site[SITE_COUNT];
 TRANSFORMATION transportation[TRANSPORTATION_COUNT];
 
 void init_data() {
