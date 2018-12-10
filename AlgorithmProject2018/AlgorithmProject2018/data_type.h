@@ -43,7 +43,7 @@ typedef struct Transportation {
 	int time;
 	int price;
 	Site *departure, *arrival;
-} TRANSFORMATION;
+} TRANSPORTATION;
 
 enum nodeColor { red, black };
 
