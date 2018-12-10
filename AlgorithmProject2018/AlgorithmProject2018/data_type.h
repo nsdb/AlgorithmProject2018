@@ -54,9 +54,25 @@ typedef struct Node {
 }Node;
 
 typedef struct ReservationInfo {
+    int site[SITE_COUNT];
+    int hotel[HOTEL_COUNT];
+    int transportation[TRANSPORTATION_COUNT];
 
+    int n_site;//length of site[]
+    int n_hotel;//length of hotel[]
+    int n_tran;//length of transportation[]
 
+    int period;
+    int budget;
+    int destination;
+    int userId;
 }ReservationInfo;
+
+typedef struct Reservation_Node{
+    ReservationInfo reservationInfo;
+    enum nodeColor color;
+    struct Reservation_Node* left, *right, *parent;
+}RESERVATION_Node;
 
 
 void init_data();
