@@ -313,7 +313,7 @@ void PrintBst(ReservationNode* node, int space) {
 	for (int i = 1; i< space; i++)
 		printf("\t");
 
-	printf("id: %d\n", node->reservationInfo.userId);
+	printf("[id: %d, period: %d, budget: %d, dest: %d]\n", node->reservationInfo.userId, node->reservationInfo.period, node->reservationInfo.budget, node->reservationInfo.destination);
 
 	PrintBst(node->left, space);
 }
