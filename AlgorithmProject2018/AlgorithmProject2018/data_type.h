@@ -86,6 +86,5 @@ void print_site();
 void print_transportation();
 void print_reservation();
 
-void set_random_array(int array[], int count, int min, int max, int duplicate_allow);
 
 

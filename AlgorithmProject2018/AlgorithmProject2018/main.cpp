@@ -42,15 +42,7 @@ int main(void) {
 	}
 
 	std::cout << "- 이용해주셔서 감사합니다." << std::endl;
-	
-
-
-
-
-
 	return 0;
-
-
 }
 
 void menu_add() {

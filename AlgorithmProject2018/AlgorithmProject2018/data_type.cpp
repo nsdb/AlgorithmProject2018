@@ -2,6 +2,7 @@
 #include "data_type.h"
 #include "rbt_hotel.h"
 #include "rbt_reservationinfo.h"
+#include "util.h"
 
 Site site[SITE_COUNT];
 Transportation transportation[TRANSPORTATION_COUNT];
@@ -130,24 +131,3 @@ void print_reservation() {
 }
 
 
-void set_random_array(int array[], int count, int min, int max, int duplicate_allow) {
-
-	int dup_check = 0, n;
-
-	for (int i = 0; i < count; i++) {
-
-		do {
-			n = rand() % (max - min + 1) + min;
-			dup_check = 0;
-			for (int j = 0; j < i && !duplicate_allow; j++) {
-				if (n == array[j]) {
-					dup_check = 1;
-					break;
-				}
-			}
-		} while (dup_check == 1); // 중복 신호가 오면 값을 다시 생성
-
-		array[i] = n;
-	}
-
-}
