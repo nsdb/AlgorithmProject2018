@@ -58,32 +58,32 @@ void Fixup_Delete_RB(RESERVATION_Node* root, RESERVATION_Node* x);
 RESERVATION_Node* Insert_RB(RESERVATION_Node* root, ReservationInfo key);
 void Delete_RB(RESERVATION_Node* root, int userId);
 void PrintBst(RESERVATION_Node* node, int space);
-void make_node(int userId);//info[]ø° ¡§∫∏ ≥÷±‚
+void make_node(int userId);//info[]Ïóê Ï†ïÎ≥¥ ÎÑ£Í∏∞
 
-void setA(int a[]);//≥Ø∏± ∫Œ∫–
+void setA(int a[]);//ÎÇ†Î¶¥ Î∂ÄÎ∂Ñ
 
 
 RESERVATION_Node* root =  NULL;
-ReservationInfo info[1000];//±◊≥… ≥À≥À«œ∞‘ ¿‚æ∆≥Ì∞Õ¿Ãπ«∑Œ ≈©±‚∏¶ πŸ≤„µµ µ 
+ReservationInfo info[1000];//Í∑∏ÎÉ• ÎÑâÎÑâÌïòÍ≤å Ïû°ÏïÑÎÖºÍ≤ÉÏù¥ÎØÄÎ°ú ÌÅ¨Í∏∞Î•º Î∞îÍøîÎèÑ Îê®
 
 
-//¿Ã∞ÕµÈ¿ª ≥—∞‹¡‡æﬂ «’¥œ¥Ÿ. æÓµ∞≈√ƒº≠ æÓ∂≤ »£≈⁄∞˙ ±≥≈Î¿ª æ¥¥¬¡ˆ ¡§«ÿ¡ˆ∏È ¿˙¿Â«ÿæﬂ «“ ∞ÕµÈ¿‘¥œ¥Ÿ.
-int s_data[100];//±◊≥… ≥À≥À«œ∞‘ ¿‚æ∆≥Ì∞Õ
-int h_data[100];//±◊≥… ≥À≥À«œ∞‘ ¿‚æ∆≥Ì∞Õ
-int t_data[300];//±◊≥… ≥À≥À«œ∞‘ ¿‚æ∆≥Ì∞Õ
-int n_reservation;//reservation_info ∞≥ºˆ∑Œ ªÁøÎ¿⁄ √ﬂ∞°µ… ∂ß∏∂¥Ÿ +1 «ÿ¡‡æﬂ«‘. √≥¿Ωø°¥¬ 0¿∏∑Œ √ ±‚»≠
-int n_site;//πÊπÆ«œ¥¬ site¿« √— ∞≥ºˆ(√‚πﬂ¡ˆ ∆˜«‘) = s_data¿« ¿Ø»ø«— ∞≥ºˆ = info[]ø° µÈæÓ∞• site[]¿« ≈©±‚
-int n_hotel;// ¿ßøÕ ∫ÒΩ¡
-int n_tran;// ¿ßøÕ ∫ÒΩ¡
+//Ïù¥Í≤ÉÎì§ÏùÑ ÎÑòÍ≤®Ï§òÏïº Ìï©ÎãàÎã§. Ïñ¥ÎîîÍ±∞Ï≥êÏÑú Ïñ¥Îñ§ Ìò∏ÌÖîÍ≥º ÍµêÌÜµÏùÑ Ïì¥ÎäîÏßÄ Ï†ïÌï¥ÏßÄÎ©¥ Ï†ÄÏû•Ìï¥Ïïº Ìï† Í≤ÉÎì§ÏûÖÎãàÎã§.
+int s_data[100];//Í∑∏ÎÉ• ÎÑâÎÑâÌïòÍ≤å Ïû°ÏïÑÎÖºÍ≤É
+int h_data[100];//Í∑∏ÎÉ• ÎÑâÎÑâÌïòÍ≤å Ïû°ÏïÑÎÖºÍ≤É
+int t_data[300];//Í∑∏ÎÉ• ÎÑâÎÑâÌïòÍ≤å Ïû°ÏïÑÎÖºÍ≤É
+int n_reservation;//reservation_info Í∞úÏàòÎ°ú ÏÇ¨Ïö©Ïûê Ï∂îÍ∞ÄÎê† ÎïåÎßàÎã§ +1 Ìï¥Ï§òÏïºÌï®. Ï≤òÏùåÏóêÎäî 0ÏúºÎ°ú Ï¥àÍ∏∞Ìôî
+int n_site;//Î∞©Î¨∏ÌïòÎäî siteÏùò Ï¥ù Í∞úÏàò(Ï∂úÎ∞úÏßÄ Ìè¨Ìï®) = s_dataÏùò Ïú†Ìö®Ìïú Í∞úÏàò = info[]Ïóê Îì§Ïñ¥Í∞à site[]Ïùò ÌÅ¨Í∏∞
+int n_hotel;// ÏúÑÏôÄ ÎπÑÏä∑
+int n_tran;// ÏúÑÏôÄ ÎπÑÏä∑
 
-//ø‰∞ÕµÈ¿∫ ¿‘∑¬¿∏∑Œ µÈæÓø¿∞⁄¡ˆø‰? ≥Ø∏Æººø‰
+//ÏöîÍ≤ÉÎì§ÏùÄ ÏûÖÎ†•ÏúºÎ°ú Îì§Ïñ¥Ïò§Í≤†ÏßÄÏöî? ÎÇ†Î¶¨ÏÑ∏Ïöî
 int period;
 int budget;
 int destination;
 
 int main()
 {
-//≥Ø∏±∫Œ∫–
+//ÎÇ†Î¶¥Î∂ÄÎ∂Ñ
     srand(time(NULL));
 
     period = 10;
@@ -152,7 +152,7 @@ void make_reservationInfo(int n_reservation){
 }
 
 
-RESERVATION_Node* Search_tree(RESERVATION_Node* node, int key){// search for id -> key is id of hotel
+RESERVATION_Node* Search_tree(RESERVATION_Node* node, int key){// search for id -> key is userid
     if(node == NULL){
         return NULL;
     }
@@ -354,7 +354,7 @@ void Fixup_Delete_RB(RESERVATION_Node* root, RESERVATION_Node* x){
     }
 }
 
-RESERVATION_Node* Insert_RB(RESERVATION_Node* root, ReservationInfo key){//userId ±‚¡ÿ¿∏∑Œ ª˝º∫
+RESERVATION_Node* Insert_RB(RESERVATION_Node* root, ReservationInfo key){//userId Í∏∞Ï§ÄÏúºÎ°ú ÏÉùÏÑ±
     RESERVATION_Node* x = (RESERVATION_Node*)malloc(sizeof(RESERVATION_Node));
     RESERVATION_Node* y = (RESERVATION_Node*)malloc(sizeof(RESERVATION_Node));
     RESERVATION_Node* z = (RESERVATION_Node*)malloc(sizeof(RESERVATION_Node));
@@ -477,7 +477,7 @@ void make_node(int userId){
 }
 
 
-void setA(int a[]){//≥Ø∏±∞Õ
+void setA(int a[]){//ÎÇ†Î¶¥Í≤É
     for(int i=0; i<10; i++){
         int dup = 0, n;
         do{
