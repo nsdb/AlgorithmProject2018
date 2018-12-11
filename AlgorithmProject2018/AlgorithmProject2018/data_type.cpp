@@ -1,9 +1,13 @@
 #include <iostream>
 #include "data_type.h"
 #include "rbt_hotel.h"
+#include "rbt_reservationinfo.h"
 
 Site site[SITE_COUNT];
-TRANSFORMATION transportation[TRANSPORTATION_COUNT];
+Transportation transportation[TRANSPORTATION_COUNT];
+
+ReservationInfo reservation_info[RESERVATION_INFO_COUNT];
+ReservationNode* reservation_node;
 
 void init_data() {
 	srand(time(NULL));
@@ -58,7 +62,27 @@ void init_data() {
 
 	std::cout << "- 교통수단 데이터 초기화 완료" << std::endl;
 
+
 }
+
+void add_reservation(int period, int budget, int destination, int userId) {
+
+	if (Search_tree(reservation_node, userId) != NULL) {
+		std::cout << "- 이미 예약하셨습니다. 예약을 취소한 후 다시 시도해주세요." << std::endl;
+
+	} else {
+		ReservationInfo info;
+		info.period = period;
+		info.budget = budget;
+		info.destination = destination;
+		info.userId = userId;
+
+		reservation_node = Insert_RB(reservation_node, info);
+		std::cout << "- 예약에 성공하였습니다." << std::endl;
+	}
+
+}
+
 
 void print_hotel(int site_id) {
 	std::cout << "- 해당 부지의 호텔 정보가 담긴 RBT를 출력합니다." << std::endl;

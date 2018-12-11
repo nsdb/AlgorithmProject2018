@@ -22,7 +22,7 @@ typedef struct Transportation {
 	int time;
 	int price;
 	Site *departure, *arrival;
-} TRANSPORTATION;
+} Transportation;
 
 typedef struct ReservationInfo {
     int site[100];
@@ -41,29 +41,29 @@ typedef struct ReservationInfo {
 
 enum nodeColor{red, black};
 
-typedef struct Reservation_Node{
+typedef struct ReservationNode{
     ReservationInfo reservationInfo;
     enum nodeColor color;
-    struct Reservation_Node* left, *right, *parent;
-}RESERVATION_Node;
+    struct ReservationNode* left, *right, *parent;
+}ReservationNode;
 
 void make_reservationInfo(int n_reservation);
-RESERVATION_Node* Search_tree(RESERVATION_Node* node, int key, int n_site);
-void left_rotation(RESERVATION_Node* root, RESERVATION_Node* x);
-void right_rotation(RESERVATION_Node* root, RESERVATION_Node* x);
-RESERVATION_Node* MinNum(RESERVATION_Node* node);
-RESERVATION_Node* successor(RESERVATION_Node* node);
-RESERVATION_Node* Fixup_Insert_RB(RESERVATION_Node* root, RESERVATION_Node* z);
-void Fixup_Delete_RB(RESERVATION_Node* root, RESERVATION_Node* x);
-RESERVATION_Node* Insert_RB(RESERVATION_Node* root, ReservationInfo key);
-void Delete_RB(RESERVATION_Node* root, int userId);
-void PrintBst(RESERVATION_Node* node, int space);
+ReservationNode* Search_tree(ReservationNode* node, int key, int n_site);
+void left_rotation(ReservationNode* root, ReservationNode* x);
+void right_rotation(ReservationNode* root, ReservationNode* x);
+ReservationNode* MinNum(ReservationNode* node);
+ReservationNode* successor(ReservationNode* node);
+ReservationNode* Fixup_Insert_RB(ReservationNode* root, ReservationNode* z);
+void Fixup_Delete_RB(ReservationNode* root, ReservationNode* x);
+ReservationNode* Insert_RB(ReservationNode* root, ReservationInfo key);
+void Delete_RB(ReservationNode* root, int userId);
+void PrintBst(ReservationNode* node, int space);
 void make_node(int userId);//info[]에 정보 넣기
 
 void setA(int a[]);//날릴 부분
 
 
-RESERVATION_Node* root =  NULL;
+ReservationNode* root =  NULL;
 ReservationInfo info[1000];//그냥 넉넉하게 잡아논것이므로 크기를 바꿔도 됨
 
 
@@ -152,7 +152,7 @@ void make_reservationInfo(int n_reservation){
 }
 
 
-RESERVATION_Node* Search_tree(RESERVATION_Node* node, int key){// search for id -> key is userid
+ReservationNode* Search_tree(ReservationNode* node, int key){// search for id -> key is userid
     if(node == NULL){
         return NULL;
     }
@@ -166,8 +166,8 @@ RESERVATION_Node* Search_tree(RESERVATION_Node* node, int key){// search for id 
     return Search_tree(node->right, key);
 }
 
-void left_rotation(RESERVATION_Node* root, RESERVATION_Node* x){
-    RESERVATION_Node* y = (RESERVATION_Node*)malloc(sizeof(RESERVATION_Node));
+void left_rotation(ReservationNode* root, ReservationNode* x){
+    ReservationNode* y = (ReservationNode*)malloc(sizeof(ReservationNode));
 
     y = x->right;
     x->right = y->left;
@@ -190,8 +190,8 @@ void left_rotation(RESERVATION_Node* root, RESERVATION_Node* x){
     return;
 }
 
-void right_rotation(RESERVATION_Node* root, RESERVATION_Node* x){
-    RESERVATION_Node* y = (RESERVATION_Node*)malloc(sizeof(RESERVATION_Node));
+void right_rotation(ReservationNode* root, ReservationNode* x){
+    ReservationNode* y = (ReservationNode*)malloc(sizeof(ReservationNode));
 
     y = x->left;
     x->left = y->right;
@@ -214,18 +214,18 @@ void right_rotation(RESERVATION_Node* root, RESERVATION_Node* x){
     return;
 }
 
-RESERVATION_Node* MinNum(RESERVATION_Node* node){
+ReservationNode* MinNum(ReservationNode* node){
     while(node->left){
         node = node->left;
     }
     return node;
 }
 
-RESERVATION_Node* successor(RESERVATION_Node* node){
+ReservationNode* successor(ReservationNode* node){
     if(node->right != NULL){
         return MinNum(node->right);
     }
-    RESERVATION_Node* p = (RESERVATION_Node*)malloc(sizeof(RESERVATION_Node));
+    ReservationNode* p = (ReservationNode*)malloc(sizeof(ReservationNode));
     p = node->parent;
     while(p && (node->reservationInfo.userId > p->reservationInfo.userId)){
         node = p;
@@ -234,8 +234,8 @@ RESERVATION_Node* successor(RESERVATION_Node* node){
     return p;
 }
 
-RESERVATION_Node* Fixup_Insert_RB(RESERVATION_Node* root, RESERVATION_Node* z){
-    RESERVATION_Node* y = (RESERVATION_Node*)malloc(sizeof(RESERVATION_Node));
+ReservationNode* Fixup_Insert_RB(ReservationNode* root, ReservationNode* z){
+    ReservationNode* y = (ReservationNode*)malloc(sizeof(ReservationNode));
 
     while(z->parent != NULL && z->parent->parent != NULL && z->parent->color == red){
         if(z->parent == z->parent->parent->left){
@@ -280,7 +280,7 @@ RESERVATION_Node* Fixup_Insert_RB(RESERVATION_Node* root, RESERVATION_Node* z){
         }
     }
 
-    RESERVATION_Node* p = z;
+    ReservationNode* p = z;
     while(p->parent)
         p = p->parent;
     root = p;
@@ -288,8 +288,8 @@ RESERVATION_Node* Fixup_Insert_RB(RESERVATION_Node* root, RESERVATION_Node* z){
     return root;
 }
 
-void Fixup_Delete_RB(RESERVATION_Node* root, RESERVATION_Node* x){
-    RESERVATION_Node* w = (RESERVATION_Node*)malloc(sizeof(RESERVATION_Node));
+void Fixup_Delete_RB(ReservationNode* root, ReservationNode* x){
+    ReservationNode* w = (ReservationNode*)malloc(sizeof(ReservationNode));
 
     while(x != root && x->color == black){
         if(x == x->parent->left){
@@ -354,10 +354,10 @@ void Fixup_Delete_RB(RESERVATION_Node* root, RESERVATION_Node* x){
     }
 }
 
-RESERVATION_Node* Insert_RB(RESERVATION_Node* root, ReservationInfo key){//userId 기준으로 생성
-    RESERVATION_Node* x = (RESERVATION_Node*)malloc(sizeof(RESERVATION_Node));
-    RESERVATION_Node* y = (RESERVATION_Node*)malloc(sizeof(RESERVATION_Node));
-    RESERVATION_Node* z = (RESERVATION_Node*)malloc(sizeof(RESERVATION_Node));
+ReservationNode* Insert_RB(ReservationNode* root, ReservationInfo key){//userId 기준으로 생성
+    ReservationNode* x = (ReservationNode*)malloc(sizeof(ReservationNode));
+    ReservationNode* y = (ReservationNode*)malloc(sizeof(ReservationNode));
+    ReservationNode* z = (ReservationNode*)malloc(sizeof(ReservationNode));
 
     if(Search_tree(root, key.userId) != NULL)//key is already in the tree
         return root;
@@ -404,10 +404,10 @@ RESERVATION_Node* Insert_RB(RESERVATION_Node* root, ReservationInfo key){//userI
     return Fixup_Insert_RB(root, z);
 }
 
-void Delete_RB(RESERVATION_Node* root, int userId){
-    RESERVATION_Node* x = (RESERVATION_Node*)malloc(sizeof(RESERVATION_Node));
-    RESERVATION_Node* y = (RESERVATION_Node*)malloc(sizeof(RESERVATION_Node));
-    RESERVATION_Node* z = (RESERVATION_Node*)malloc(sizeof(RESERVATION_Node));
+void Delete_RB(ReservationNode* root, int userId){
+    ReservationNode* x = (ReservationNode*)malloc(sizeof(ReservationNode));
+    ReservationNode* y = (ReservationNode*)malloc(sizeof(ReservationNode));
+    ReservationNode* z = (ReservationNode*)malloc(sizeof(ReservationNode));
 
     z = Search_tree(root, userId);
     if(z == NULL)
@@ -441,7 +441,7 @@ void Delete_RB(RESERVATION_Node* root, int userId){
     free(y);
 }
 
-void PrintBst(RESERVATION_Node* node, int space){
+void PrintBst(ReservationNode* node, int space){
     if(node == NULL)
         return;
 

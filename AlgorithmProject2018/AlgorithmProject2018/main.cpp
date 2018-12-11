@@ -3,6 +3,7 @@
 #include "rbt_hotel.h"
 #include "util.h"
 
+void menu_add();
 void menu_inquiry();
 
 int main(void) {
@@ -27,7 +28,7 @@ int main(void) {
 		menu = input_number();
 		switch (menu) {
 
-		case 1: std::cout << "- 예약하기" << std::endl; break; // TODO
+		case 1: std::cout << "- 예약하기" << std::endl; menu_add();  break;
 		case 2: std::cout << "- 취소하기" << std::endl; break; // TODO
 		case 3: std::cout << "- 예약현황조회" << std::endl; break; // TODO
 		case 4: std::cout << "- 끝내기" << std::endl; break;
@@ -47,6 +48,44 @@ int main(void) {
 
 	return 0;
 
+
+}
+
+void menu_add() {
+
+	std::cout << "- 여행기간을 입력해주세요 : ";
+	int period = input_number();
+	while (period <= 0) {
+		std::cout << "- 여행기간은 하루 이상이어야 합니다. 다시 입력해주세요." << std::endl;
+		std::cout << "- 여행기간을 입력해주세요 : ";
+		period = input_number();
+	}
+
+	std::cout << "- 예산을 입력해주세요 : ";
+	int budget = input_number();
+	while (budget <= 0) {
+		std::cout << "- 예산은 1원 이상이어야 합니다. 다시 입력해주세요." << std::endl;
+		std::cout << "- 예산을 입력해주세요 : ";
+		budget = input_number();
+	}
+
+	std::cout << "- 목적지 ID를 입력해주세요 : ";
+	int destination = input_number();
+	while (destination < 0) {
+		std::cout << "- 목적지 ID는 1 이상이어야 합니다. 다시 입력해주세요." << std::endl;
+		std::cout << "- 목적지 ID를 입력해주세요 : ";
+		destination = input_number();
+	}
+
+	std::cout << "- 사용자 ID를 입력해주세요 : ";
+	int user = input_number();
+	while (user < 0) {
+		std::cout << "- 사용자 ID는 1 이상이어야 합니다. 다시 입력해주세요." << std::endl;
+		std::cout << "- 사용자 ID를 입력해주세요 : ";
+		user = input_number();
+	}
+
+	add_reservation(period, budget, destination, user);
 
 }
 

@@ -9,6 +9,7 @@
 const int TRANSPORTATION_COUNT = 300;
 const int SITE_COUNT = 100;
 const int HOTEL_COUNT = 100;
+const int RESERVATION_INFO_COUNT = 1000;
 
 const int HOTEL_PRICE_MIN = 50000;
 const int HOTEL_PRICE_MAX = 300000;
@@ -23,7 +24,7 @@ const int TRANSPORTATION_TIME_MAX = 20;
 const int TRANSPORTATION_PRICE_MIN = 5000;
 const int TRANSPORTATION_PRICE_MAX = 200000;
 
-struct Node;
+struct HotelNode;
 
 typedef struct Hotel {
 	int id;
@@ -35,7 +36,7 @@ typedef struct Site {
 	int time;
 	int price;
 	Hotel hotel[HOTEL_COUNT];
-	Node* hotel_node;
+	HotelNode* hotel_node;
 }Site;
 
 typedef struct Transportation {
@@ -43,14 +44,14 @@ typedef struct Transportation {
 	int time;
 	int price;
 	Site *departure, *arrival;
-} TRANSPORTATION;
+} Transportation;
 
 enum nodeColor { red, black };
 
-typedef struct Node {
+typedef struct HotelNode {
 	Hotel hotel;
 	enum nodeColor color;
-	Node* left, *right, *parent;
+	HotelNode* left, *right, *parent;
 }Node;
 
 typedef struct ReservationInfo {
@@ -68,17 +69,21 @@ typedef struct ReservationInfo {
     int userId;
 }ReservationInfo;
 
-typedef struct Reservation_Node{
+typedef struct ReservationNode{
     ReservationInfo reservationInfo;
     enum nodeColor color;
-    struct Reservation_Node* left, *right, *parent;
-}RESERVATION_Node;
+    struct ReservationNode* left, *right, *parent;
+}ReservationNode;
 
 
 void init_data();
+
+void add_reservation(int period, int budget, int destination, int userId);
+
 void print_hotel(int site_id);
 void print_site();
 void print_transportation();
+
 void set_random_array(int array[], int count, int min, int max, int duplicate_allow);
 
 

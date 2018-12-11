@@ -1,34 +1,34 @@
-#include "rbt_hotel.h"
+#include "rbt_reservationinfo.h"
 
-extern Site site[SITE_COUNT];
-extern Transportation transportation[TRANSPORTATION_COUNT];
 
-HotelNode* make_hotelTree(int n_site) {
+extern ReservationInfo reservation_info[RESERVATION_INFO_COUNT];
 
-	HotelNode* root = NULL;
-	for (int i = 0; i < HOTEL_COUNT; i++) {
-		root = Insert_RB(root, site[n_site].hotel[i], n_site);
+
+ReservationNode* make_reservationInfo(int n_reservation) {
+	ReservationNode* root = NULL;
+	for (int i = 0; i<n_reservation; i++) {
+		root = Insert_RB(root, reservation_info[i]);
 	}
 	return root;
 }
 
 
-HotelNode* Search_tree(HotelNode* node, int key, int n_site) {// search for id -> key is id of hotel
+ReservationNode* Search_tree(ReservationNode* node, int key) {// search for id -> key is userid
 	if (node == NULL) {
 		return NULL;
 	}
-	if (node->hotel.id == key) {
+	if (node->reservationInfo.userId == key) {
 		return node;
 	}
-	if (node->hotel.price > site[n_site].hotel[key].price) {
-		return Search_tree(node->left, key, n_site);
+	if (node->reservationInfo.userId > key) {
+		return Search_tree(node->left, key);
 	}
 
-	return Search_tree(node->right, key, n_site);
+	return Search_tree(node->right, key);
 }
 
-void left_rotation(HotelNode* root, HotelNode* x) {
-	HotelNode* y = (HotelNode*)malloc(sizeof(HotelNode));
+void left_rotation(ReservationNode* root, ReservationNode* x) {
+	ReservationNode* y = (ReservationNode*)malloc(sizeof(ReservationNode));
 
 	y = x->right;
 	x->right = y->left;
@@ -51,8 +51,8 @@ void left_rotation(HotelNode* root, HotelNode* x) {
 	return;
 }
 
-void right_rotation(HotelNode* root, HotelNode* x) {
-	HotelNode* y = (HotelNode*)malloc(sizeof(HotelNode));
+void right_rotation(ReservationNode* root, ReservationNode* x) {
+	ReservationNode* y = (ReservationNode*)malloc(sizeof(ReservationNode));
 
 	y = x->left;
 	x->left = y->right;
@@ -75,28 +75,28 @@ void right_rotation(HotelNode* root, HotelNode* x) {
 	return;
 }
 
-HotelNode* MinNum(HotelNode* node) {
+ReservationNode* MinNum(ReservationNode* node) {
 	while (node->left) {
 		node = node->left;
 	}
 	return node;
 }
 
-HotelNode* successor(HotelNode* node) {
+ReservationNode* successor(ReservationNode* node) {
 	if (node->right != NULL) {
 		return MinNum(node->right);
 	}
-	HotelNode* p = (HotelNode*)malloc(sizeof(HotelNode));
+	ReservationNode* p = (ReservationNode*)malloc(sizeof(ReservationNode));
 	p = node->parent;
-	while (p && (node->hotel.price > p->hotel.price)) {
+	while (p && (node->reservationInfo.userId > p->reservationInfo.userId)) {
 		node = p;
 		p = p->parent;
 	}
 	return p;
 }
 
-HotelNode* Fixup_Insert_RB(HotelNode* root, HotelNode* z) {
-	HotelNode* y = (HotelNode*)malloc(sizeof(HotelNode));
+ReservationNode* Fixup_Insert_RB(ReservationNode* root, ReservationNode* z) {
+	ReservationNode* y = (ReservationNode*)malloc(sizeof(ReservationNode));
 
 	while (z->parent != NULL && z->parent->parent != NULL && z->parent->color == red) {
 		if (z->parent == z->parent->parent->left) {
@@ -141,7 +141,7 @@ HotelNode* Fixup_Insert_RB(HotelNode* root, HotelNode* z) {
 		}
 	}
 
-	HotelNode* p = z;
+	ReservationNode* p = z;
 	while (p->parent)
 		p = p->parent;
 	root = p;
@@ -149,8 +149,8 @@ HotelNode* Fixup_Insert_RB(HotelNode* root, HotelNode* z) {
 	return root;
 }
 
-void Fixup_Delete_RB(HotelNode* root, HotelNode* x) {
-	HotelNode* w = (HotelNode*)malloc(sizeof(HotelNode));
+void Fixup_Delete_RB(ReservationNode* root, ReservationNode* x) {
+	ReservationNode* w = (ReservationNode*)malloc(sizeof(ReservationNode));
 
 	while (x != root && x->color == black) {
 		if (x == x->parent->left) {
@@ -215,22 +215,38 @@ void Fixup_Delete_RB(HotelNode* root, HotelNode* x) {
 	}
 }
 
-HotelNode* Insert_RB(HotelNode* root, Hotel key, int n_site) {//price 기준으로 생성
-	HotelNode* x = (HotelNode*)malloc(sizeof(HotelNode));
-	HotelNode* y = (HotelNode*)malloc(sizeof(HotelNode));
-	HotelNode* z = (HotelNode*)malloc(sizeof(HotelNode));
+ReservationNode* Insert_RB(ReservationNode* root, ReservationInfo key) {//userId 기준으로 생성
+	ReservationNode* x = (ReservationNode*)malloc(sizeof(ReservationNode));
+	ReservationNode* y = (ReservationNode*)malloc(sizeof(ReservationNode));
+	ReservationNode* z = (ReservationNode*)malloc(sizeof(ReservationNode));
 
-	if (Search_tree(root, key.id, n_site) != NULL)//key is already in the tree
+	if (Search_tree(root, key.userId) != NULL)//key is already in the tree
 		return root;
 
 	y = NULL;
 	x = root;
-	z->hotel.price = key.price;
-	z->hotel.id = key.id;
+
+	z->reservationInfo.budget = key.budget;
+	z->reservationInfo.destination = key.destination;
+	z->reservationInfo.period = key.period;
+	z->reservationInfo.userId = key.userId;
+	z->reservationInfo.n_hotel = key.n_hotel;
+	z->reservationInfo.n_site = key.n_site;
+	z->reservationInfo.n_tran = key.n_tran;
+	for (int i = 0; i<key.n_site; i++) {
+		z->reservationInfo.site[i] = key.site[i];
+	}
+	for (int i = 0; i<key.n_hotel; i++) {
+		z->reservationInfo.hotel[i] = key.hotel[i];
+	}
+	for (int i = 0; i<key.n_tran; i++) {
+		z->reservationInfo.transportation[i] = key.transportation[i];
+	}
+
 
 	while (x) {
 		y = x;
-		if (z->hotel.price < x->hotel.price)
+		if (z->reservationInfo.userId < x->reservationInfo.userId)
 			x = x->left;
 		else
 			x = x->right;
@@ -239,7 +255,7 @@ HotelNode* Insert_RB(HotelNode* root, Hotel key, int n_site) {//price 기준으로 �
 	z->parent = y;
 	if (y == NULL)
 		root = z;
-	else if (z->hotel.price < y->hotel.price)
+	else if (z->reservationInfo.userId < y->reservationInfo.userId)
 		y->left = z;
 	else
 		y->right = z;
@@ -249,12 +265,12 @@ HotelNode* Insert_RB(HotelNode* root, Hotel key, int n_site) {//price 기준으로 �
 	return Fixup_Insert_RB(root, z);
 }
 
-void Delete_RB(HotelNode* root, Hotel key, int n_site) {
-	HotelNode* x = (HotelNode*)malloc(sizeof(HotelNode));
-	HotelNode* y = (HotelNode*)malloc(sizeof(HotelNode));
-	HotelNode* z = (HotelNode*)malloc(sizeof(HotelNode));
+void Delete_RB(ReservationNode* root, int userId) {
+	ReservationNode* x = (ReservationNode*)malloc(sizeof(ReservationNode));
+	ReservationNode* y = (ReservationNode*)malloc(sizeof(ReservationNode));
+	ReservationNode* z = (ReservationNode*)malloc(sizeof(ReservationNode));
 
-	z = Search_tree(root, key.id, n_site);
+	z = Search_tree(root, userId);
 	if (z == NULL)
 		return;
 
@@ -279,14 +295,14 @@ void Delete_RB(HotelNode* root, Hotel key, int n_site) {
 		y->parent->right = x;
 
 	if (y != z)
-		z->hotel.price = y->hotel.price;
+		z->reservationInfo.userId = y->reservationInfo.userId;
 	if (y->color == black)
 		Fixup_Delete_RB(root, x);
 
 	free(y);
 }
 
-void PrintBst(HotelNode* node, int space) {
+void PrintBst(ReservationNode* node, int space) {
 	if (node == NULL)
 		return;
 
@@ -297,7 +313,7 @@ void PrintBst(HotelNode* node, int space) {
 	for (int i = 1; i< space; i++)
 		printf("\t");
 
-	printf("[id: %d, price: %d]\n", node->hotel.id, node->hotel.price);
+	printf("id: %d\n", node->reservationInfo.userId);
 
 	PrintBst(node->left, space);
 }

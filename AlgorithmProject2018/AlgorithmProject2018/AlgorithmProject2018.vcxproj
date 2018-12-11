@@ -114,10 +114,12 @@
     <ClCompile Include="data_type.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="rbt_hotel.cpp" />
+    <ClCompile Include="rbt_reservationinfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="data_type.h" />
     <ClInclude Include="rbt_hotel.h" />
+    <ClInclude Include="rbt_reservationinfo.h" />
     <ClInclude Include="util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

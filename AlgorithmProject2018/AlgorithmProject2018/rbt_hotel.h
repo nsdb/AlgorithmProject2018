@@ -3,16 +3,16 @@
 #include <stdio.h>
 #include "data_type.h"
 
-Node* make_hotelTree(int n_site);
-Node* Search_tree(Node* node, int key, int n_site);
-void left_rotation(Node* root, Node* x);
-void right_rotation(Node* root, Node* x);
-Node* MinNum(Node* node);
-Node* successor(Node* node);
-Node* Fixup_Insert_RB(Node* root, Node* z);
-void Fixup_Delete_RB(Node* root, Node* x);
-Node* Insert_RB(Node* root, Hotel key, int n_site);
-void Delete_RB(Node* root, Hotel key, int n_site);
-void PrintBst(Node* node, int space);
+HotelNode* make_hotelTree(int n_site);
+HotelNode* Search_tree(HotelNode* node, int key, int n_site);
+void left_rotation(HotelNode* root, HotelNode* x);
+void right_rotation(HotelNode* root, HotelNode* x);
+HotelNode* MinNum(HotelNode* node);
+HotelNode* successor(HotelNode* node);
+HotelNode* Fixup_Insert_RB(HotelNode* root, HotelNode* z);
+void Fixup_Delete_RB(HotelNode* root, HotelNode* x);
+HotelNode* Insert_RB(HotelNode* root, Hotel key, int n_site);
+void Delete_RB(HotelNode* root, Hotel key, int n_site);
+void PrintBst(HotelNode* node, int space);
 
 
