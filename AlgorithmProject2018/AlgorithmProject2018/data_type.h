@@ -79,10 +79,12 @@ typedef struct ReservationNode{
 void init_data();
 
 void add_reservation(int period, int budget, int destination, int userId);
+void remove_reservation(int userId);
 
 void print_hotel(int site_id);
 void print_site();
 void print_transportation();
+void print_reservation();
 
 void set_random_array(int array[], int count, int min, int max, int duplicate_allow);
 

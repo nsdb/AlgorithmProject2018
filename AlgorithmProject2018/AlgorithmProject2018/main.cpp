@@ -4,7 +4,9 @@
 #include "util.h"
 
 void menu_add();
-void menu_inquiry();
+void menu_remove();
+void menu_inquiry_reservation();
+void menu_inquiry_data();
 
 int main(void) {
 
@@ -29,10 +31,10 @@ int main(void) {
 		switch (menu) {
 
 		case 1: std::cout << "- 예약하기" << std::endl; menu_add();  break;
-		case 2: std::cout << "- 취소하기" << std::endl; break; // TODO
-		case 3: std::cout << "- 예약현황조회" << std::endl; break; // TODO
+		case 2: std::cout << "- 취소하기" << std::endl; menu_remove();  break;
+		case 3: std::cout << "- 예약현황조회" << std::endl; menu_inquiry_reservation();  break;
 		case 4: std::cout << "- 끝내기" << std::endl; break;
-		case 5: std::cout << "- 데이터조회" << std::endl; menu_inquiry(); break;
+		case 5: std::cout << "- 데이터조회" << std::endl; menu_inquiry_data(); break;
 		default: std::cout << "- 다시 입력해주세요." << std::endl;
 
 		}
@@ -89,7 +91,23 @@ void menu_add() {
 
 }
 
-void menu_inquiry() {
+void menu_remove() {
+
+	std::cout << "- 사용자 ID를 입력해주세요 : ";
+	int user = input_number();
+	while (user < 0) {
+		std::cout << "- 사용자 ID는 1 이상이어야 합니다. 다시 입력해주세요." << std::endl;
+		std::cout << "- 사용자 ID를 입력해주세요 : ";
+		user = input_number();
+	}
+	remove_reservation(user);
+
+}
+void menu_inquiry_reservation() {
+	print_reservation();
+}
+
+void menu_inquiry_data() {
 
 	int menu = -1;
 

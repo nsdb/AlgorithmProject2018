@@ -83,6 +83,20 @@ void add_reservation(int period, int budget, int destination, int userId) {
 
 }
 
+void remove_reservation(int userId) {
+
+	if (Search_tree(reservation_node, userId) == NULL) {
+		std::cout << "- 예약정보가 없습니다." << std::endl;
+	} else {
+
+		Delete_RB(reservation_node, userId);
+		std::cout << "- 예약을 취소하였습니다." << std::endl;
+		
+	}
+
+}
+
+
 
 void print_hotel(int site_id) {
 	std::cout << "- 해당 부지의 호텔 정보가 담긴 RBT를 출력합니다." << std::endl;
@@ -108,6 +122,11 @@ void print_transportation() {
 			", arrival_site_id=" << transportation[i].arrival->id <<
 			std::endl;
 	}
+}
+void print_reservation() {
+	std::cout << "- 예약 정보가 담긴 RBT를 출력합니다." << std::endl;
+	PrintBst(reservation_node, 0);
+
 }
 
 
